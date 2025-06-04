@@ -24,28 +24,60 @@
         }
 
         .left-col {
-            flex: 0 0 10%;
+            flex: 0 0 var(--left-col-width, 10%);
             padding: 1rem;            
         }
 
         .right-col {
-            flex: 0 1 90%;
+            flex: 0 1 var(--right-col-width, 90%);
             padding: 1rem;            
         }
 </style>
 </head>
 <body>
+
+
+
     <h1>Aleksei Luchinsky</h1>
-<p>With a passion for data analysis, statistics, software development and all things, I have both the skill set and professional background necessary to dive deep into the data science world. As an upbeat, self-motivated team player with excellent communication, I envision an exciting future in the industry. Browse my site to see all that I have to offer.
+
+        <p>PhD Data Science</p>
+
+<section class="two-column-section">
+    <div class="left-col">
+        <img src="./images/aleksei_luchinsky.jpg" alt="Aleksei Luchinsky" style="width: 100%; height: auto;">
+    </div>
+    <div class="right-col">
+        <p>With a passion for data analysis, statistics, software development and all things, I have both the skill set and professional background necessary to dive deep into the data science world. As an upbeat, self-motivated team player with excellent communication, I envision an exciting future in the industry. Browse my site to see all that I have to offer.
 </p>
+    </div>
+</section>
+
 
 <h2> My Contacts</h2>
 
-<p>Email:			aluchi@bgsu.edu</p>
-<p>Phone: 		(419) 601-9999</p>
-<p>Address:		1133 Cambridge Blvd, Bowling Green, Ohio, 43402</p>
-<p>Status:		US citizen</p>
-<p>LinkedIn:	<a href="https://www.linkedin.com/in/aleksei-luchinsky/">https://www.linkedin.com/in/aleksei-luchinsky/</a><p>
+<table>
+    <tr>
+        <td><strong>Email:</strong></td>
+        <td>aluchi@bgsu.edu</td>
+    </tr>
+    <tr>
+        <td><strong>Phone:</strong></td>
+        <td>(419) 601-9999</td>
+    </tr>
+    <tr>
+        <td><strong>Address:</strong></td>
+        <td>1133 Cambridge Blvd, Bowling Green, Ohio, 43402</td>
+    </tr>
+    <tr>    
+        <td><strong>Status:</strong></td>
+        <td>US citizen</td>
+    </tr>
+    <tr>
+        <td><strong>LinkedIn:</strong></td>
+        <td><a href="https://www.linkedin.com/in/aleksei-luchinsky/">https://www.linkedin.com/in/aleksei-luchinsky/</a></td>
+    </tr>
+</table>
+
 
 <h2> Education </h2>
 
@@ -60,7 +92,7 @@
 <h3>2022</h3>
 
 <h4>Students Performance Analysis</h4>
-<section class="two-column-section">
+<section class="two-column-section" style="--left-col-width: 10%; --right-col-width: 90%;">
     <div class="left-col">
         <img src = "./images/projects/2022-1.png " alt="Students Performance Analysis" style="width: 100%; height: auto;">
     </div>
