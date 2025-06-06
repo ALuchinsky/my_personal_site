@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aleksei Luchinsky</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
-  <style>
+
 <style>
   * { box-sizing: border-box; }
   body {
@@ -70,7 +70,9 @@
       flex: 1 1 100%;
       max-width: 100%;
     }
-  }  </style>
+  }
+</style>
+
 </head>
 <body>
 
@@ -79,6 +81,19 @@
     <h1>Aleksei Luchinsky</h1>
 
         <p>PhD Data Science</p>
+
+
+<!-- Tab links -->
+<div class = "tab">
+    <button class = "tablinks" onclick="openPage(event, 'Home')">Home</button>
+    <button class = "tablinks" onclick="openPage(event, 'CV')">CV</button>
+    <button class = "tablinks" onclick="openPage(event, 'Publications')">Publications</button>
+    <button class = "tablinks" onclick="openPage(event, 'Projects')">Projects</button>
+</div>
+
+<!-- Tab content-->
+
+<div id="Home" class="tabcontent">
 
 <section class="two-column-section">
     <div class="left-col">
@@ -91,14 +106,7 @@
 </section>
 
 
-<h2> Content</h2>
 
-<p><a href="#my_contacts_id">My Contacts</a></p>
-<p><a href="#education_id">Education</a></p>
-<p><a href="#work_id">Work Experience</a></p>
-<p><a href="#skills_id">Skills</a></p>
-<p><a href="#awards_id">Awards and Publications</a></p>
-<p><a href="#projects_id">Projects</a></p>
 
 <div id="my_contacts_id"><h2> My Contacts</h2></div>
 
@@ -125,6 +133,9 @@
     </tr>
 </table>
 
+</div>
+
+<div id="CV" class="tabcontent">
 
 <div id="education_id"><h2> Education </h2></div>
 
@@ -218,6 +229,10 @@
 </table>
 
 <div id="awards_id"><h2> Awards and Publications</h2></div> 
+
+</div>
+
+<div id="Projects" class="tabcontent">
 
 <div id="projects_id"><h2 > Projects </h2></div>
 
@@ -375,7 +390,9 @@ Unsupervised machine learning programs for playing some simple board games are c
 In this report, we study the impact of COVID- 19 on several US states and how the disease compares with historical causes of death, and it’s potential contribution to excess deaths when compared to an equivalent historical time frame. We provide insights into how our data can support excess death analysis in the future, and reflect on the significant challenges, highlighted by our study, for future research in comparing COVID-19 datasets.
         </p>
     </div>
-</section>  
+</section>
+
+</div>
 
 
 </body>
