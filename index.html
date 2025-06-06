@@ -3,75 +3,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aleksei Luchinsky</title>
+  <link rel="stylesheet" href="./styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
 
-<style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0 20px;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-  }
-  h1, h2, h3, h4 {
-    color: #cc5200;
-  }
-  header {
-    padding: 2rem 0;
-    text-align: center;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    display: block;
-  }
-  .two-column-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin: 2rem 0;
-    align-items: flex-start;
-  }
-  .left-col {
-    flex: 1 1 250px;
-    max-width: 250px;
-  }
-  .right-col {
-    flex: 1 1 500px;
-    min-width: 250px;
-  }
-  section { margin-bottom: 3rem; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-  }
-  td {
-    padding: 8px;
-    vertical-align: top;
-  }
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  ul { margin-bottom: 2rem; }
-  a { color: #0077cc; text-decoration: none; }
-  a:hover { text-decoration: underline; }
 
-  /* 👇 Media query fix for narrow windows */
-  @media (max-width: 768px) {
-    .two-column-section {
-      flex-direction: column;
-    }
-    .left-col,
-    .right-col {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-  }
-</style>
 
 </head>
 <body>
@@ -391,8 +326,24 @@ In this report, we study the impact of COVID- 19 on several US states and how th
         </p>
     </div>
 </section>
-
 </div>
 
+<script>
+function openPage(evt, cityName) {
+  var i, tabcontent, tablinks;
+  console.log("openPage called with cityName: " + cityName);
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 
 </body>
+</html>
