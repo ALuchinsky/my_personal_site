@@ -3,82 +3,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aleksei Luchinsky</title>
+  <link rel="stylesheet" href="./styles.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
-  <style>
-<style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0 20px;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-  }
-  h1, h2, h3, h4 {
-    color: #cc5200;
-  }
-  header {
-    padding: 2rem 0;
-    text-align: center;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    display: block;
-  }
-  .two-column-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin: 2rem 0;
-    align-items: flex-start;
-  }
-  .left-col {
-    flex: 1 1 250px;
-    max-width: 250px;
-  }
-  .right-col {
-    flex: 1 1 500px;
-    min-width: 250px;
-  }
-  section { margin-bottom: 3rem; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-  }
-  td {
-    padding: 8px;
-    vertical-align: top;
-  }
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  ul { margin-bottom: 2rem; }
-  a { color: #0077cc; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  /* 👇 Media query fix for narrow windows */
-  @media (max-width: 768px) {
-    .two-column-section {
-      flex-direction: column;
-    }
-    .left-col,
-    .right-col {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-  }  </style>
 </head>
 <body>
 
 
-
     <h1>Aleksei Luchinsky</h1>
 
-        <p>PhD Data Science</p>
+    <p>PhD Data Science</p>
+
+
+<!-- Tab links -->
+<div class = "tab">
+    <button class = "tablinks" onclick="openPage(event, 'Home')">Home</button>
+    <button class = "tablinks" onclick="openPage(event, 'CV')">CV</button>
+    <button class = "tablinks" onclick="openPage(event, 'Publications')">Publications</button>
+    <button class = "tablinks" onclick="openPage(event, 'Projects')">Projects</button>
+</div>
+
+<!-- Tab content-->
+
+<div id="Home" class="tabcontent" style="display: block;">
 
 <section class="two-column-section">
     <div class="left-col">
@@ -91,14 +37,7 @@
 </section>
 
 
-<h2> Content</h2>
 
-<p><a href="#my_contacts_id">My Contacts</a></p>
-<p><a href="#education_id">Education</a></p>
-<p><a href="#work_id">Work Experience</a></p>
-<p><a href="#skills_id">Skills</a></p>
-<p><a href="#awards_id">Awards and Publications</a></p>
-<p><a href="#projects_id">Projects</a></p>
 
 <div id="my_contacts_id"><h2> My Contacts</h2></div>
 
@@ -125,6 +64,9 @@
     </tr>
 </table>
 
+</div>
+
+<div id="CV" class="tabcontent">
 
 <div id="education_id"><h2> Education </h2></div>
 
@@ -216,8 +158,13 @@
     <td>Teamwork</td>
 </tr>
 </table>
+</div>
 
-<div id="awards_id"><h2> Awards and Publications</h2></div> 
+<div id="Publications" class="tabcontent">
+Here is the list of my publications. You can find the full list of my publications on <a href="https://scholar.google.com/citations?user=2b1k0XcAAAAJ&hl=en">Google Scholar</a>.
+</div>
+
+<div id="Projects" class="tabcontent">
 
 <div id="projects_id"><h2 > Projects </h2></div>
 
@@ -375,7 +322,25 @@ Unsupervised machine learning programs for playing some simple board games are c
 In this report, we study the impact of COVID- 19 on several US states and how the disease compares with historical causes of death, and it’s potential contribution to excess deaths when compared to an equivalent historical time frame. We provide insights into how our data can support excess death analysis in the future, and reflect on the significant challenges, highlighted by our study, for future research in comparing COVID-19 datasets.
         </p>
     </div>
-</section>  
+</section>
+</div>
 
+<script>
+function openPage(evt, cityName) {
+  var i, tabcontent, tablinks;
+  console.log("openPage called with cityName: " + cityName);
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 
 </body>
+</html>
