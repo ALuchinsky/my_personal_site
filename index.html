@@ -16,11 +16,11 @@
 
 
 <!-- Tab links -->
-<div class = "tab">
-    <button class = "tablinks" onclick="openPage(event, 'Home')">Home</button>
-    <button class = "tablinks" onclick="openPage(event, 'CV')">CV</button>
-    <button class = "tablinks" onclick="openPage(event, 'Publications')">Publications</button>
-    <button class = "tablinks" onclick="openPage(event, 'Projects')">Projects</button>
+<div class="tab">
+  <a href="index.html?tab=Home"><button class="tablinks">Home</button></a>
+  <a href="index.html?tab=CV"><button class="tablinks">CV</button></a>
+  <a href="index.html?tab=Publications"><button class="tablinks">Publications</button></a>
+  <a href="index.html?tab=Projects"><button class="tablinks">Projects</button></a>
 </div>
 
 <!-- Tab content-->
@@ -245,7 +245,8 @@ You can download my CV in PDF format <a href="./images/IR_Luchinsky.pdf">here</a
     </div>
 </section>
 
-<a href="https://bgsu-gol.web.app/"><h3>Game of Life</h3></a>
+<!-- <a href="https://bgsu-gol.web.app/"><h3>Game of Life</h3></a> -->
+ <a href="./gol.html"><h3>Game of Life</h3></a>
 <section class="two-column-section">
     <div class="left-col">
         <img src = "./images/projects/GOL.png" alt="Game of Life" style="width: 100%; height: auto;">
@@ -458,22 +459,40 @@ End of hat area
 
 
 <script>
-function openPage(evt, cityName) {
+function openPage(evt, tabName) {
   var i, tabcontent, tablinks;
-  console.log("openPage called with cityName: " + cityName);
+  console.log("openPage called with tabName: " + tabName);
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].classList.remove("active");
   }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  var tab = document.getElementById(tabName);
+  if (tab) {
+    tab.style.display = "block";
+  }
+  if (evt) {
+    evt.currentTarget.classList.add("active");
+  } else {
+    // Automatically mark the correct button active if evt is null (on load)
+    for (i = 0; i < tablinks.length; i++) {
+      if (tablinks[i].textContent === tabName) {
+        tablinks[i].classList.add("active");
+      }
+    }
+  }
 }
-</script>
 
+// Open default tab or tab from URL
+window.onload = function() {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get("tab") || "Home";
+  openPage(null, tab);
+};
+</script>
 </body>
 
 <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
