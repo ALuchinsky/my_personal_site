@@ -32,3 +32,16 @@ async function logVisit() {
 }
 
 logVisit()
+
+async function updateStat() {
+    const {data, error} = await client.rpc("get_visit_stats");
+    if(error) {
+        console.error("Loading data", error);
+        return;
+    }
+    console.log(data)
+}
+
+updateStat()
+
+
