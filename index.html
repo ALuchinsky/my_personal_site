@@ -522,6 +522,7 @@ window.onload = function() {
   const params = new URLSearchParams(window.location.search);
   const tab = params.get("tab") || "Home";
   openPage(null, tab);
+  updateStat()
 };
 </script>
 </body>
