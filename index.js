@@ -39,7 +39,10 @@ async function updateStat() {
         console.error("Loading data", error);
         return;
     }
-    console.log(data)
+    console.log("data = ", data)
+    result = data[0]
+    document.getElementById("visitors-counter").innerText = 
+        `Total: ${result.total_count}, This week: ${result.this_week_count}, Unique IPs: ${result.unique_count}, Unique this week: ${result.unique_this_week_count}`;
 }
 
 updateStat()
