@@ -31,12 +31,35 @@ async function logVisit() {
     });
 }
 
+async function ip_visit_summary() {
+  const {data, error} = await client.rpc("get_ip_visit_summary");
+  if(error) {
+    console.error("Loading visits summary: ", error)
+    return;
+  }
+  // console.log("ip_visits_info=", data)
+  token = "40917692a6d38d"
+  const reult = data.forEach(async item => {
+    // console.log(d.ip_address)
+    // console.log("\t",d.visit_count)
+    // console.log("\t",d.first_visit)
+    // console.log("\t",d.last_visit)
+    const resp = await fetch(`https://ipinfo.io/${item.ip_address}?token=${token}`);
+    const info = await resp.json()
+    console.log(info.ip, item.visit_count, info.country, info.city, info.hostname)
+  });
+}
+
 
 
 // opend particular tab
 function openPage(evt, tabName) {
   var i, tabcontent, tablinks;
-  console.log("openPage called with tabName: " + tabName);
+  console.log("openPage called with tabName: '" + tabName + "'");
+  if(tabName == "ip_info") {
+    ip_visit_summary();
+  }
+
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
@@ -86,3 +109,4 @@ async function updateStat() {
     document.getElementById("visitors-counter").innerText = 
         `Total: ${result.total_count}, This week: ${result.this_week_count}, Unique IPs: ${result.unique_count}, Unique this week: ${result.unique_this_week_count}`;
 }
+
