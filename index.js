@@ -32,6 +32,7 @@ async function logVisit() {
 }
 
 async function ip_visit_summary() {
+  const tbody = document.get
   const {data, error} = await client.rpc("get_ip_visit_summary");
   if(error) {
     console.error("Loading visits summary: ", error)
@@ -39,15 +40,26 @@ async function ip_visit_summary() {
   }
   // console.log("ip_visits_info=", data)
   token = "40917692a6d38d"
-  const reult = data.forEach(async item => {
-    // console.log(d.ip_address)
-    // console.log("\t",d.visit_count)
-    // console.log("\t",d.first_visit)
-    // console.log("\t",d.last_visit)
-    const resp = await fetch(`https://ipinfo.io/${item.ip_address}?token=${token}`);
-    const info = await resp.json()
-    console.log(info.ip, item.visit_count, info.country, info.city, info.hostname)
-  });
+  const result = await Promise.all(
+    data.map(async (item) => {
+      try {
+        const resp = await fetch(`https://ipinfo.io/${item.ip_address}?token=${token}`);
+        if(!resp.ok) {throw new Error(`HTTP ${resp.status}`)}
+        const info = await resp.json()
+        return {ip:info.ip || null,
+            visit_count:item.visit_count || null,
+           country:info.country || null,
+           city:info.city || null,
+           hostname:info.hostname || null
+          };
+        } catch(err) {
+          console.warn(`Could not fetch info for ${item.ip}:`, err.message)
+          return {ip: null, visit_count: null,country: null,city: null,hostname: null}
+        }
+      })
+    )
+    console.table(result)
+
 }
 
 
