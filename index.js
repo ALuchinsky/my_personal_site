@@ -31,12 +31,61 @@ async function logVisit() {
     });
 }
 
+async function ip_visit_summary() {
+  const tbody = document.getElementById("ip-table-body")
+  tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>'
+  const {data, error} = await client.rpc("get_ip_visit_summary");
+  if(error) {
+    console.error("Loading visits summary: ", error)
+    return;
+  }
+  // console.log("ip_visits_info=", data)
+  token = "40917692a6d38d"
+  const result = await Promise.all(
+    data.map(async (item) => {
+      try {
+        const resp = await fetch(`https://ipinfo.io/${item.ip_address}?token=${token}`);
+        if(!resp.ok) {throw new Error(`HTTP ${resp.status}`)}
+        const info = await resp.json()
+        return {ip:info.ip || null,
+           visit_count:item.visit_count || null,
+           country:info.country || null,
+           city:info.city || null,
+           hostname:info.hostname || null
+          };
+        } catch(err) {
+          console.warn(`Could not fetch info for ${item.ip}:`, err.message)
+          return {ip: null, visit_count: null,country: null,city: null,hostname: null}
+        }
+      })
+    )
+    // console.table(result)
+    tbody.innerHTML = ''
+    result.forEach(row => {
+      const tr = document.createElement("tr")
+      tr.innerHTML = `
+        <td> ${row.ip}</td>
+        <td> ${row.visit_count}</td>
+        <td> ${row.country}</td>
+        <td> ${row.city}</td>
+        <td> ${row.hostname}</td>
+      `;
+      tbody.appendChild(tr)
+      
+    });
+
+}
+
 
 
 // opend particular tab
 function openPage(evt, tabName) {
   var i, tabcontent, tablinks;
-  console.log("openPage called with tabName: " + tabName);
+  console.log("openPage called with tabName: '" + tabName + "'");
+  if(tabName == "ip_info") {
+    ip_visit_summary();
+  }
+
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
@@ -86,3 +135,4 @@ async function updateStat() {
     document.getElementById("visitors-counter").innerText = 
         `Total: ${result.total_count}, This week: ${result.this_week_count}, Unique IPs: ${result.unique_count}, Unique this week: ${result.unique_this_week_count}`;
 }
+
