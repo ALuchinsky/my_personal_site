@@ -32,7 +32,8 @@ async function logVisit() {
 }
 
 async function ip_visit_summary() {
-  const tbody = document.get
+  const tbody = document.getElementById("ip-table-body")
+  tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>'
   const {data, error} = await client.rpc("get_ip_visit_summary");
   if(error) {
     console.error("Loading visits summary: ", error)
@@ -47,7 +48,7 @@ async function ip_visit_summary() {
         if(!resp.ok) {throw new Error(`HTTP ${resp.status}`)}
         const info = await resp.json()
         return {ip:info.ip || null,
-            visit_count:item.visit_count || null,
+           visit_count:item.visit_count || null,
            country:info.country || null,
            city:info.city || null,
            hostname:info.hostname || null
@@ -58,7 +59,20 @@ async function ip_visit_summary() {
         }
       })
     )
-    console.table(result)
+    // console.table(result)
+    tbody.innerHTML = ''
+    result.forEach(row => {
+      const tr = document.createElement("tr")
+      tr.innerHTML = `
+        <td> ${row.ip}</td>
+        <td> ${row.visit_count}</td>
+        <td> ${row.country}</td>
+        <td> ${row.city}</td>
+        <td> ${row.hostname}</td>
+      `;
+      tbody.appendChild(tr)
+      
+    });
 
 }
 
