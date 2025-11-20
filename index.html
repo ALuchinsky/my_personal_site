@@ -512,6 +512,7 @@ In this report, we study the impact of COVID- 19 on several US states and how th
 
 <div id="ip-stats">
   <h3>Visitor details by IP</h3>
+  <input type="checkbox" id="week-cb"><label>This week only</label>
   <table id="ip-table" border="1">
     <thead>
       <tr>
@@ -527,6 +528,10 @@ In this report, we study the impact of COVID- 19 on several US states and how th
 </div>
 </div>
 
+<script>
+    const week_cb = document.getElementById("week-cb")
+    week_cb.addEventListener("change", ip_visit_summary)
+</script>
 
 <div class="footer">
     <div id="visitors-counter">aaa</div>

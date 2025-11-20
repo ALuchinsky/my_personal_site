@@ -31,14 +31,41 @@ async function logVisit() {
     });
 }
 
+// week_cb.addEventListener("change", function() {
+//   console.log("checked")
+// })
+
+function isDateInThisWeek(date) {
+  const todayObj = new Date();
+  const todayDate = todayObj.getDate();
+  const todayDay = todayObj.getDay();
+
+  // get first date of week
+  const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay));
+
+  // get last date of week
+  const lastDayOfWeek = new Date(firstDayOfWeek);
+  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+
+  // if date is equal or within the first and last dates of the week
+  return date >= firstDayOfWeek && date <= lastDayOfWeek;
+}
+
 async function ip_visit_summary() {
   const tbody = document.getElementById("ip-table-body")
   tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>'
-  const {data, error} = await client.rpc("get_ip_visit_summary");
+  let {data, error} = await client.rpc("get_ip_visit_summary");
   if(error) {
     console.error("Loading visits summary: ", error)
     return;
   }
+  console.log("data=", data)
+  const week_cb = document.getElementById("week-cb")
+  console.log("week_cb:", week_cb.checked)
+  if(week_cb.checked) {
+     data = data.filter( d => isDateInThisWeek(new Date(d["last_visit"])))
+  }
+
   // console.log("ip_visits_info=", data)
   token = "40917692a6d38d"
   const result = await Promise.all(
