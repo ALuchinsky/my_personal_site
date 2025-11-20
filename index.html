@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
   <!-- Supabase functions -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://unpkg.com/tablesort/dist/tablesort.min.js"></script>
+  <script src="https://unpkg.com/tablesort@5.3.0/dist/sorts/tablesort.number.min.js"></script>
   <script src="index.js"></script>
 
 </head>
@@ -517,7 +519,7 @@ In this report, we study the impact of COVID- 19 on several US states and how th
     <thead>
       <tr>
         <th>IP Address</th>
-        <th>Visits</th>
+        <th data-sort-method="number">Visits</th>
         <th>Country</th>
         <th>City</th>
         <th>Host</th>
@@ -527,6 +529,10 @@ In this report, we study the impact of COVID- 19 on several US states and how th
   </table>
 </div>
 </div>
+
+<script>
+    new Tablesort( document.getElementById("ip-table"))
+</script>
 
 <script>
     const week_cb = document.getElementById("week-cb")
