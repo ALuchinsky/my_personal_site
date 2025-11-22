@@ -1,0 +1,30 @@
+name: Update Last Updated Date
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+
+    if: github.actor != 'github-actions[bot]'  # Prevent infinite loop
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update last updated date
+        run: |
+          DATE=$(date +"%B %d, %Y")
+          echo "Updating date to $DATE"
+          sed -i "s|{{LAST_UPDATED}}|$DATE|g" index.html
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Auto-update last updated date [skip ci]" || echo "No changes to commit"
+          git push
