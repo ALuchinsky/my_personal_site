@@ -1,32 +1,29 @@
-name: Update Last Updated Date
+name: Build & Deploy with Date
 
 on:
   push:
     branches:
-      - main
+      - main  # adjust if your main branch is called differently
+
 permissions:
-  contents: write  # ✅ Allow pushing changes
+  contents: read  # no commit back, read-only is enough
 
 jobs:
-  update-date:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    if: github.actor != 'github-actions[bot]'  # Prevent infinite loop
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update last updated date
+      - name: Set last updated date
         run: |
           DATE=$(date +"%B %d, %Y %H:%M")
-          echo "Updating date to $DATE"
+          echo "Inserting date: $DATE"
           sed -i "s|{{LAST_UPDATED}}|$DATE|g" index.html
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Auto-update last updated date [skip ci]" || echo "No changes to commit"
-          git push
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .   # or ./build if you use a generator
