@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write  # ✅ Allow pushing changes
 
 jobs:
   update-date:
