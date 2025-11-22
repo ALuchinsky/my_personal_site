@@ -51,6 +51,18 @@ function isDateInThisWeek(date) {
   return date >= firstDayOfWeek && date <= lastDayOfWeek;
 }
 
+function formatLocalDate(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+
 async function ip_visit_summary() {
   const tbody = document.getElementById("ip-table-body")
   tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>'
@@ -76,6 +88,7 @@ async function ip_visit_summary() {
         const info = await resp.json()
         return {ip:info.ip || null,
            visit_count:item.visit_count || null,
+           last_visit: item.last_visit,
            country:info.country || null,
            city:info.city || null,
            hostname:info.hostname || null
@@ -93,6 +106,7 @@ async function ip_visit_summary() {
       tr.innerHTML = `
         <td> ${row.ip}</td>
         <td> ${row.visit_count}</td>
+        <td> ${formatLocalDate(row["last_visit"])}</td>
         <td> ${row.country}</td>
         <td> ${row.city}</td>
         <td> ${row.hostname}</td>
