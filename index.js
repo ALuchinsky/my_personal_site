@@ -89,6 +89,7 @@ async function ip_visit_summary() {
         const info = await resp.json()
         return {ip:info.ip || null,
            visit_count:item.visit_count || null,
+           first_visit: item.first_visit,
            last_visit: item.last_visit,
            country:info.country || null,
            city:info.city || null,
@@ -107,6 +108,7 @@ async function ip_visit_summary() {
       tr.innerHTML = `
         <td> ${row.ip}</td>
         <td> ${row.visit_count}</td>
+        <td> ${formatLocalDate(row["first_visit"])}</td>
         <td> ${formatLocalDate(row["last_visit"])}</td>
         <td> ${row.country}</td>
         <td> ${row.city}</td>
